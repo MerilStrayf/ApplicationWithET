@@ -120,6 +120,7 @@
     <None Include="DatabaseUpdate\ReadMe.txt" />
     <None Include="FunctionalTests\MyTest.ets" />
     <None Include="Images\ReadMe.txt" />
+    <None Include="nuget.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
