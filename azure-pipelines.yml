@@ -12,14 +12,17 @@ pool:
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+  buildConfiguration: 'Debug'
 
 steps:
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
   inputs:
+    command: 'restore'
     restoreSolution: '$(solution)'
+    feedsToUse: 'config'
+    nugetConfigPath: '.\ApplicationWithET\ApplicationWithET.Module\NuGet.config'
 
 - task: VSBuild@1
   inputs:
@@ -27,7 +30,25 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
+
+- task: PowerShell@2
+  displayName: EasyTest
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    targetType: 'inline'
+    script: |
+      $easyTestPath="ApplicationWithET"
+      sqllocaldb start MSSQLLocalDB
+      Nuget install DevExpress.EasyTest.TestExecutor -OutputDirectory EasyTest -configfile NuGet.config      
+      New-Item -ItemType directory -Path ".\EasyTest\Bin\"
+      Get-ChildItem -Path "EasyTest\*" -Include *.dll,*.exe -Recurse | Where {$_.FullName -notlike "*\netstandard*\*"} | Copy-Item -Destination ".\EasyTest\Bin\"
+      Copy-Item "C:\Program Files (x86)\Microsoft.NET\Primary Interop Assemblies\Microsoft.mshtml.dll" -Destination ".\EasyTest\Bin\"
+      EasyTest\Bin\TestExecutor.v19.2.exe $easyTestPath
+      Get-Content -Path $easyTestPath\TestsLog.xml
+      if(Select-String -Pattern 'Result="Failed"', 'Result="Warning"' -Path $easyTestPath\TestsLog.xml) { exit 1 }
+
+- task: PublishPipelineArtifact@1
+  condition: succeededOrFailed()
+  inputs:
+    targetPath: '.\EasyTests\'
+    artifact: 'TestsResultFiles'
+    publishLocation: 'pipeline'
