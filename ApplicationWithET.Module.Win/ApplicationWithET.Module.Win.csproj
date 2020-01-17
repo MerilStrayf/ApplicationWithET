@@ -161,9 +161,6 @@
     <None Include="Images\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ApplicationWithET.Module\ApplicationWithET.Module.csproj">
       <Project>{5F15837D-D1E5-44DC-92F0-4F2EBE9C3F8D}</Project>
       <Name>ApplicationWithET.Module</Name>
