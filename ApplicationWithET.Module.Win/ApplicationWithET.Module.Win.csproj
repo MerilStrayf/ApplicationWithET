@@ -53,11 +53,8 @@
     <Reference Include="DevExpress.DataAccess.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <HintPath>..\packages\DevExpress.DataAccess.19.2.5\lib\net452\DevExpress.DataAccess.v19.2.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.ExpressApp.ScriptRecorder.v19.2">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="DevExpress.ExpressApp.ScriptRecorder.Win.v19.2">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="DevExpress.ExpressApp.ScriptRecorder.Win.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\packages\DevExpress.ExpressApp.ScriptRecorder.Win.19.2.5\lib\net452\DevExpress.ExpressApp.ScriptRecorder.Win.v19.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.ExpressApp.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <HintPath>..\packages\DevExpress.ExpressApp.19.2.5\lib\net452\DevExpress.ExpressApp.v19.2.dll</HintPath>
