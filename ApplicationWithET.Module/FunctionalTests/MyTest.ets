@@ -19,3 +19,5 @@
 *Action Delete
 *HandleDialog
  Respond = Yes
+ 
+*Action Close
