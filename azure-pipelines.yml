@@ -40,13 +40,13 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      $easyTestPath=".\ApplicationWithET\ApplicationWithET.Module\FunctionalTests"
+      $easyTestPath=".\ApplicationWithET.Module\FunctionalTests"
       sqllocaldb start MSSQLLocalDB
       Nuget install DevExpress.EasyTest.TestExecutor -OutputDirectory EasyTest -configfile NuGet.config      
       New-Item -ItemType directory -Path ".\EasyTest\Bin\"
       Get-ChildItem -Path "EasyTest\*" -Include *.dll,*.exe -Recurse | Where {$_.FullName -notlike "*\netstandard*\*"} | Copy-Item -Destination ".\EasyTest\Bin\"
       Copy-Item "C:\Program Files (x86)\Microsoft.NET\Primary Interop Assemblies\Microsoft.mshtml.dll" -Destination ".\EasyTest\Bin\"
-      EasyTest\Bin\TestExecutor.v19.2.exe $easyTestPath\config.xml
+      EasyTest\Bin\TestExecutor.v19.2.exe $easyTestPath
       Get-Content -Path $easyTestPath\TestsLog.xml
       if(Select-String -Pattern 'Result="Failed"', 'Result="Warning"' -Path $easyTestPath\TestsLog.xml) { exit 1 }
 
